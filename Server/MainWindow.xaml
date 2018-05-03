@@ -1,0 +1,132 @@
+﻿<Window x:Class="ServerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:local="clr-namespace:ServerApp"
+        mc:Ignorable="d"
+        Title="Server" Height="720" Width="1280" ResizeMode="NoResize" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            >
+            Choose IP Address:
+        </Label>
+        <ComboBox 
+            Name="ipAddressesComboBox"
+            Margin="10"            
+            VerticalAlignment="Center"
+            Grid.Row="0"
+            Grid.Column="0"
+            />
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            >
+            Choose Port:
+        </Label>
+        <TextBox 
+            Name="portTxtBox"
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            />
+        <Button
+            Name="startBtn"                        
+            Margin="10"
+            Grid.Row="0"
+            Grid.Column="2"
+            Click="StartButton_Click"
+            >
+            Start Listening
+        </Button>
+        <Label
+            Grid.Row="1"
+            Grid.Column="3"
+            HorizontalAlignment="Center"
+            >
+            # of tracked people:
+        </Label>
+        <Label
+            Name="trackedPeopleLbl"
+            Grid.Row="2"
+            Grid.Column="3"
+            HorizontalAlignment="Center"
+            FontSize="50"
+            >
+            0
+        </Label>
+        <Label
+            Grid.Row="3"
+            Grid.Column="3"            
+            HorizontalAlignment="Center"
+            >
+            Connected devices:
+        </Label>
+        <ListView
+            Name="connectedDevicesLV"
+            Grid.Row="4"
+            Grid.Column="3"
+            BorderThickness="0"
+            HorizontalAlignment="Center"
+            />
+        <Ellipse              
+            Name="notificationEllipse"
+            Grid.Row="5"            
+            Grid.Column="3"            
+            Height="100"
+            Width="100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Fill="LimeGreen"
+            Opacity="0"
+            >
+            <Ellipse.Resources>
+                <Storyboard 
+                    x:Key="notificationStoryBoard" 
+                    Storyboard.TargetName="notificationEllipse"
+                    Storyboard.TargetProperty="Opacity"                    
+                    >
+                    <DoubleAnimation
+                        From="0"
+                        To="1"
+                        Duration="0:0:00.50"                        
+                        />
+                    <DoubleAnimation
+                        From="1"
+                        To="0"
+                        Duration="0:0:00.50"
+                        BeginTime="0:0:01.00"
+                        />
+                </Storyboard>
+            </Ellipse.Resources>
+        </Ellipse>
+        <WindowsFormsHost 
+            Name="winFormsHost"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="5"
+            />
+        <TextBlock
+            Name="statusBar"
+            Grid.Row="6"
+            Grid.ColumnSpan="3"
+            />
+    </Grid>
+</Window>
